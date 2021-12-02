@@ -1,6 +1,6 @@
 import utility
 
-def coundDifferences(list):
+def count_differences(list):
     increaseAmount = 0
     decreaseAmount = 0
     previousLine = None
@@ -23,8 +23,7 @@ def coundDifferences(list):
     return utility.solution({ 'increaseAmount': increaseAmount, 'decreaseAmount': decreaseAmount })
 
 def part1():
-    inputs = utility.inputs(parse=lambda x: int(x))
-    return coundDifferences(inputs)
+    return count_differences(utility.inputs(parse=lambda x: int(x)))
 
 
 def part2():
@@ -34,7 +33,7 @@ def part2():
     for index in range(len(inputs) - 2):
         sums.append(inputs[index]+inputs[index+1]+inputs[index+2])
 
-    return coundDifferences(sums)
+    return count_differences(sums)
 
 
 if __name__ == '__main__':
