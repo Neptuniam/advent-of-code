@@ -4,19 +4,18 @@ import sys, inspect
 args = sys.argv
 TEST_FLAG = '--test' in args
 
-def inputs(parse=lambda x : x, pre_process='\n'):
+def inputs(parse=lambda x : x, pre_process='\n', hide_empty=True):
     day = args[0].split('/')[-2]
 
     file = f'{day}/input/input.txt' if not TEST_FLAG else f'{day}/input/test.txt'
 
     with open(file) as fp:
         contents = fp.read().split(pre_process)
-        return [ parse(line) for line in contents if line ]
+        return [ parse(line) for line in contents if line or not hide_empty ]
 
 
 def log(*args):
     print(*args)
-
 
 def solution(d={}, test=None):
     return namedtuple('Solution', d.keys())(**d), test
