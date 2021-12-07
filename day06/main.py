@@ -5,24 +5,23 @@ inputs = utility.inputs(parse=lambda x: x)
 def simulate_population(days):
     fishes = inputs[0].split(',')
     fishes = list(map(lambda x: int(x), fishes))
+    fishes.sort()
+    fishes_by_days_left = [0] * 9
+
+    for fish in fishes:
+        fishes_by_days_left[fish] += 1
 
     for day in range(days):
-        print(f'Day: {day}')
-        toAdd = []
+        fishes_birthing = fishes_by_days_left.pop(0)
 
-        for i in range(len(fishes)):
-            fishes[i] -= 1
+        fishes_by_days_left[6] += fishes_birthing
+        fishes_by_days_left.append(fishes_birthing)
 
-            if fishes[i] < 0:
-                fishes[i] = 6
-                toAdd.append(8)
+    sum = 0
+    for fish_day in fishes_by_days_left:
+        sum += fish_day
 
-        # Add the baby fish at the end of the day to not mess with the above for loop
-        for newFish in toAdd:
-            fishes.append(newFish)
-        # print(f'After {day+1} days: {fishes}')
-
-    return len(fishes)
+    return sum
 
 def part1():
     return utility.solution({ 'fish_count': simulate_population(80) })
