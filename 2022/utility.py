@@ -20,6 +20,10 @@ def log(*args):
 def solution(d={}, test=None):
     return namedtuple('Solution', d.keys())(**d), test
 
+def partition(lst, size):
+    for i in range(0, len(lst), size):
+        yield lst[i : i+size]
+
 
 def cli():
     """CLI Parser
